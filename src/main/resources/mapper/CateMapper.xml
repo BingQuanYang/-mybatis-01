@@ -14,7 +14,7 @@
     <!--   resultMap  直接使用定义的resultMap -->
     <!--   resultType  一般情况指向一个对象(不推荐使用)-->
     <!--    parameterType=""  在mapper.xml中声明参数  (不推荐)-->
-    <select id="selectList" resultType="com.ybq.mybatis.entity.Cate">
+    <select id="selectList" resultMap="BaseResult">
         select cate_id, name, create_date, status
         from cate
         where status = 0;

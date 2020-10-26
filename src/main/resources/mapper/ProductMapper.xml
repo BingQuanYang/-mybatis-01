@@ -16,8 +16,8 @@
         insert into product(title, content, img, price, cate_id)
         values (#{product.title}, #{product.content}, #{product.img}, #{product.price}, #{product.cateId});
     </insert>
-    <select id="selectListById" resultType="com.ybq.mybatis.entity.Product">
-        select *
+    <select id="selectListById" resultMap="BaseResult">
+        select product_id, title, content, img, price, cate_id, create_date, status
         from product
         where status = 0
           and cate_id = #{cateId};
