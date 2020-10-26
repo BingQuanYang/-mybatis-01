@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ybq.mybatis.mapper.TestInsertMapper">
+    <resultMap id="BaseResultMap" type="com.ybq.mybatis.entity.Test1">
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+    </resultMap>
+    <!--
+        获取ID
+       属性  useGeneratedKeys true
+             keyProperty  指定主键赋值的字段
+       -->
+    <!--方法一-->
+     <insert id="insert" keyProperty="test.id" useGeneratedKeys="true">
+         insert into t_test(name)
+         values (#{test.name})
+     </insert>
+
+    <!--   oracle 主键没有自增  序列对象-->
+    <!--方法二-->
+    <!--<insert id="insert">
+        &lt;!&ndash;order="BEFORE" 在执行目标之前执行&ndash;&gt;
+        <selectKey keyProperty="test.id" order="BEFORE">
+            &lt;!&ndash;获取id信息&ndash;&gt;
+            select id
+            from dual;
+        </selectKey>
+        insert into t_test(name)
+        values (#{test.name})
+    </insert>-->
+
+    <!--方法三-->
+    <!--<insert id="insert">
+        &lt;!&ndash;适合数据没有自增的&ndash;&gt;
+        insert into t_test(name)
+        values (#{test.name});
+        <selectKey keyProperty="test.id" order="AFTER">
+            &lt;!&ndash;通过selectKey获取ID&ndash;&gt;
+            select last_insert_id() as id;
+        </selectKey>
+    </insert>-->
+</mapper>
